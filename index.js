@@ -9,6 +9,7 @@ app.set('view engine', 'pug')
 
 // set static files folder
 app.use(express.static('views'))
+app.use(express.static('stylesheets'))
 //app.set('views', '/views')
 
 // Declare Express routes
