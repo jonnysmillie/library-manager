@@ -1,0 +1,27 @@
+{
+  "name": "library-manager-v1",
+  "version": "1.0.0",
+  "description": "A CRUD library manager using Sequelize and Node.js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonnysmillie/library-manager.git"
+  },
+  "keywords": [
+    "sequelize",
+    "nodejs",
+    "crud"
+  ],
+  "author": "Jonny Smillie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonnysmillie/library-manager/issues"
+  },
+  "homepage": "https://github.com/jonnysmillie/library-manager#readme",
+  "dependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
