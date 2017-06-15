@@ -12,9 +12,47 @@ app.use(express.static('views'))
 app.use(express.static('stylesheets'))
 //app.set('views', '/views')
 
-// Declare Express routes
+	/////////////////////////////
+	// Declare Express routes //
+	////////////////////////////
+// index	
 app.get('/', function (req, res) {
   res.render('index')
+})
+// Books routes
+app.get('/books/new', function (req, res) {
+  res.render('new_book')
+})
+app.get('/books', function (req, res) {
+  res.render('all_books')
+})
+app.get('books?filter=overdue', function (req, res) {
+  res.render('overdue_books')
+})
+app.get('/books?filter=checked_out', function (req, res) {
+  res.render('checked_books')
+})
+
+// Patrons routes
+app.get('/patrons/new', function (req, res) {
+  res.render('new_patron')
+})
+app.get('/patrons', function (req, res) {
+  res.render('all_patrons')
+})
+
+// Loans routes
+app.get('/loans/new', function (req, res) {
+  res.render('new_loan')
+})
+app.get('/loans', function (req, res) {
+  res.render('all_loans')
+})
+app.get('loans?filter=overdue', function (req, res) {
+  res.render('overdue_loans')
+})
+app.get('/loans?filter=checked_out', function (req, res) {
+  res.render('checked_loans')
 })
 
 app.listen(3000, function () {
