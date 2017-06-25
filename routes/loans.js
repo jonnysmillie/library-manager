@@ -4,13 +4,13 @@ var express = require('express');
 var router = express.Router();
 var moment = require('moment');
 
-var Books = require('../models').Books;
-var Loans = require('../models').Loans;
-var Patrons = require('../models').Patrons;
+var Book = require('../models').Book;
+var Loan = require('../models').Loan;
+var Patron = require('../models').Patron;
 
 /** GET loans page. */
 router.get('/', function(req, res, next) {
-  Loans.findAll({
+  Loan.findAll({
     include: [{
       all: true
     }]
@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 
 /** GET checked out loans page. */
 router.get('/checked_out', function(req, res, next) {
-  Loans.findAll({
+  Loan.findAll({
     include: [{
       all: true
     }],
@@ -45,10 +45,9 @@ router.get('/checked_out', function(req, res, next) {
   });
 });
 
-
 /** GET overdue loans page. */
 router.get('/overdue', function(req, res, next) {
-  Loans.findAll({
+  Loan.findAll({
     include: [{
       all: true
     }],
@@ -70,16 +69,15 @@ router.get('/overdue', function(req, res, next) {
   });
 });
 
-
 /** GET new loan form page. */
 router.get('/new', function(req, res, next) {
 
   var allBooks, allPatrons;
 
-  Books.findAll().then(function(results) {
+  Book.findAll().then(function(results) {
     allBooks = results;
   }).then(
-    Patrons.findAll().then(function(results) {
+    Patron.findAll().then(function(results) {
       allPatrons = results;
     }).then(function() {
       res.render('new_loan', {
@@ -97,16 +95,16 @@ router.get('/new', function(req, res, next) {
 
 /** POST create new loan. */
 router.post('/new', function(req, res, next) {
-  Loans.create(req.body).then(function(results) {
+  Loan.create(req.body).then(function(results) {
     res.redirect("/loans/");
   }).catch(function(error) {
     if (error.name === 'SequelizeValidationError') {
       var allBooks, allPatrons;
 
-      Books.findAll().then(function(results) {
+      Book.findAll().then(function(results) {
         allBooks = results;
       }).then(
-        Patrons.findAll().then(function(results) {
+        Patron.findAll().then(function(results) {
           allPatrons = results;
         }).then(function() {
           res.render('new_loan', {
@@ -126,6 +124,5 @@ router.post('/new', function(req, res, next) {
     }
   });
 });
-
 
 module.exports = router;

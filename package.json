@@ -1,40 +1,22 @@
 {
-  "name": "library-manager-v1",
-  "version": "1.0.0",
-  "description": "A CRUD library manager using Sequelize and Node.js.",
-  "main": "app.js",
+  "name": "portfolio10-library-manager",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jonnysmillie/library-manager.git"
-  },
-  "keywords": [
-    "sequelize",
-    "nodejs",
-    "crud"
-  ],
-  "author": "Jonny Smillie",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jonnysmillie/library-manager/issues"
-  },
-  "homepage": "https://github.com/jonnysmillie/library-manager#readme",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "debug": "^2.6.8",
-    "express": "^4.15.3",
-    "method-override": "^2.3.9",
-    "moment": "^2.18.1",
-    "morgan": "^1.8.2",
-    "pug": "^2.0.0-rc.2",
-    "sequelize": "^4.1.0",
-    "sequelize-cli": "^2.7.0",
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.14.0",
+    "method-override": "^2.3.7",
+    "moment": "^2.17.1",
+    "morgan": "~1.7.0",
+    "pug": "~2.0.0-beta6",
+    "sequelize": "^3.27.0",
+    "sequelize-cli": "^2.4.0",
+    "serve-favicon": "~2.3.0",
     "sqlite3": "^3.1.8"
-  },
-  "devDependencies": {
-    "nodemon": "^1.11.0"
   }
 }

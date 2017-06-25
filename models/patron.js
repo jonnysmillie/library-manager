@@ -1,15 +1,12 @@
 'use strict';
+
 module.exports = function(sequelize, DataTypes) {
-  var Patrons = sequelize.define('Patrons', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
-    },
+  var Patron = sequelize.define('Patron', {
     first_name: {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "First Name is required"
+          msg: "First name is required"
         }
       }
     },
@@ -17,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Last Name is required"
+          msg: "Last name is required"
         }
       }
     },
@@ -32,8 +29,8 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: {
-          msg: "Email is required"
+        isEmail: {
+          msg: "A valid email address is required"
         }
       }
     },
@@ -49,18 +46,23 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       validate: {
         notEmpty: {
-          msg: "Zip Code is required"
+          msg: "Zip code is required"
+        },
+        len: {
+          args: [5],
+          msg: "A valid zip code is required"
         }
       }
-    }
-  }, {
-    timestamps: false
+    },
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        Patron.hasMany(models.Loan, {
+          foreignKey: 'patron_id'
+        });
       }
-    }
+    },
+    timestamps: false
   });
-  return Patrons;
+  return Patron;
 };

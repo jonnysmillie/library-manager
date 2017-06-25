@@ -1,65 +1,57 @@
+'use strict';
 
-// Express
-const express = require('express');
-const pug = require('pug');
-const app = express();
+var express = require('express');
 var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 
-// Include Router
-var router = express.Router();
-
-// Sequelize
-var sequelize = require('./models').sequelize;
-
-
-// Set routes
+var index = require('./routes/index');
 var books = require('./routes/books');
-var patrons = require('./routes/patrons');
 var loans = require('./routes/loans');
+var patrons = require('./routes/patrons');
 
+var app = express();
 
-
-// Set views
-
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(methodOverride('_method'));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// set static files folder
-//app.use(express.static('views'));
-app.use(express.static('stylesheets'));
-
-
-
-
-// index	
-app.get('/', function (req, res) {
-  res.render('home')
-})
-
+app.use('/', index);
 app.use('/books', books);
-app.use('/patrons', patrons);
 app.use('/loans', loans);
+app.use('/patrons', patrons);
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 
-//app.set('views', '/views')
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-	/////////////////////////////
-	// Declare Express routes //
-	////////////////////////////
-
-
-
-
-
-
-// handling 404 errors
-//app.get('/*', function (req, res) {
-//    res.render('error');
-//});
-
-
-
-
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error', {
+    error: err,
+    title: "Error"
+  });
+});
 
 module.exports = app;

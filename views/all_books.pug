@@ -1,42 +1,27 @@
-doctype html
-html
-	head
-		title Books
-		link(rel='stylesheet', href='/style.css')
-	nav
-		ul
-			li
-				a(href='../') Home
-			li
-				a(href='books') Books
-			li
-				a(href='patrons') Patrons
-			li
-				a(href='loans') Loans
-	body
-		h1 Books
-		p
-			a.button(href='books/new') Create New Book
-		p
-			| Filters 
-			a(href='books') All
-			|  
-			a(href='/books/overdue_books') Overdue
-			|  
-			a(href='/books/checked_out') Checked Out
-		table
-			thead
-				tr
-					th Title
-					th Author
-					th Genre
-					th Year Released
-			tbody
-				each book in books
-					tr
-						td
-							a(href='/books/' + book.id) #{book.title}
-						td #{book.author}
-						td #{book.genre}
-						td #{book.first_published}
-				
+include partials/_head
+include partials/_nav
+
+body
+  h1 Books
+  p
+    a.button(href='/books/new') Create New Book
+  p
+    | Filters
+    a(href='/books')  All |
+    a(href='/books/overdue')  Overdue |
+    a(href='/books/checked_out')  Checked Out
+  table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year Released
+    tbody
+      each book in books
+        tr
+          td
+            a(href='/books/' + book.id) #{book.title}
+          td #{book.author}
+          td #{book.genre}
+          td #{book.first_published}

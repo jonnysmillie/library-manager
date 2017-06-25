@@ -1,40 +1,34 @@
-doctype html
-html
-	head
-		title Checked Out Books
-		link(rel='stylesheet', href='stylesheets/style.css')
-	nav
-		ul
-			li
-				a(href='../') Home
-			li
-				a(href='books') Books
-			li
-				a(href='patrons') Patrons
-			li
-				a(href='loans') Loans
-	body
-		h1 Checked Out Books
-		p
-			a.button(href='loans/new') Create New Loan
-		p
-			| Filters 
-			a(href='/loans') All
-			|  
-			a(href='/loans?filter=overdue') Overdue
-			|  
-			a(href='/loans?filter=checked_out') Checked Out
-		table
-			thead
-				each loan in loans
-					tr
-						td
-							a(href="/books/" +loan.Books.id) #{loan.Books.title}
-							td
-								a(href="/patrons/" + loan.Patrons.id) #{loan.Patrons.first_name} #{loan.Patrons.lat_name}
-							td #{loan.loaned_on}
-							td #{loan.return_by}
-							td #{loan.returned_on}
-							td
-								a(href="/books/" + loan.Books.id + '/return') Return Book
+include partials/_head
+include partials/_nav
 
+h1 Checked Out Books
+p
+  a.button(href='/loans/new') Create New Loan
+p
+  | Filters
+  a(href='/loans')  All
+  |  |
+  a(href='/loans/overdue')  Overdue
+  |  |
+  a(href='/loans/checked_out')  Checked Out
+table
+  thead
+    tr
+      th Book
+      th Patron
+      th Loaned on
+      th Return by
+      th Returned on
+      th Action
+  tbody
+    each loan in loans
+      tr
+        td
+          a(href='/books/' + loan.Book.id) #{loan.Book.title}
+        td
+          a(href="/patrons/" + loan.Patron.id) #{loan.Patron.first_name} #{loan.Patron.last_name}
+        td #{loan.loaned_on}
+        td #{loan.return_by}
+        td #{loan.returned_on}
+        td
+          a.button(href='/books/' + loan.Book.id + '/return') Return Book

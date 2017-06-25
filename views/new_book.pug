@@ -1,32 +1,21 @@
-doctype html
-html
-	head
-		title New Book
-		link(rel='stylesheet', href='/style.css')
-	nav
-		ul
-			li
-				a(href='../') Home
-			li
-				a(href='../books') Books
-			li
-				a(href='../patrons') Patrons
-			li
-				a(href='../loans') Loans
-	body
-		h1 New Book
-		form(method="post", action="/books/new")
-			p
-				label(for='title') Title
-				input#title(name='title', type='text', value=book.title)
-			p
-				label(for='author') Author
-				input#author(name='author', type='text', value=book.author)
-			p
-				label(for='genre') Genre
-				input#genre(name='genre', type='text' value=book.genre)
-			p
-				label(for='first_published') First Published
-				input#first_published(name='first_published', type='text', value=book.first_published)
-			p
-				input(type='submit', value='Create New Book')
+include partials/_head
+include partials/_nav
+
+h1 New Book
+form(method="post")
+  if error
+    include partials/_error
+  p
+    label(for='title') Title
+    input#title(type='text' name='title')
+  p
+    label(for='author') Author
+    input#author(type='text' name='author')
+  p
+    label(for='genre') Genre
+    input#genre(type='text' name='genre')
+  p
+    label(for='first_published') First Published
+    input#first_published(type='text' name='first_published')
+  p
+    input(type='submit', value='Create New Book')
