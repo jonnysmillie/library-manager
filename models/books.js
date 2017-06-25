@@ -1,7 +1,12 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Book = sequelize.define('Book', {
+  var Books = sequelize.define('Books', {
+      id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     title: {
       type: DataTypes.STRING,
       validate: {
@@ -35,5 +40,5 @@ module.exports = function(sequelize, DataTypes) {
     },
     timestamps: false
   });
-  return Book;
+  return Books;
 };

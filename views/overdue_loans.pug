@@ -2,7 +2,7 @@ doctype html
 html
 	head
 		title Overdue Loans
-		link(rel='stylesheet', href='stylesheets/style.css')
+		link(rel='stylesheet', href='style.css')
 	nav
 		ul
 			li
@@ -16,7 +16,7 @@ html
 	body
 		h1 Overdue Loans
 		p
-			a.button(href='/laons/new') Create New Loan
+			a.button(href='/loans/new') Create New Loan
 		p
 			| Filters 
 			a(href='/loans') All
@@ -25,42 +25,15 @@ html
 			|  
 			a(href='/loans?filter=checked_out') Checked Out
 		table
-			thead
-				tr
-					th Book
-					th Patron 
-					th Loaned on
-					th Return by 
-					th Returned on
-					th Action
-			tbody
-				tr
-					td
-						a(href='book_detail') Harry Potter and the Goblet of Fire
-					td
-						a(href='patron_detail') Andrew Chalkley
-					td 2015-12-11
-					td 2015-12-18
-					td
-					td
-						a.button(href='return_book') Return Book
-				tr
-					td
-						a(href='book_detail') A Brief History of Time
-					td
-						a(href='patron_detail') Andrew Chalkley
-					td 2015-12-12
-					td 2015-12-19
-					td
-					td
-						a.button(href='return_book') Return Book
-				tr
-					td
-						a(href='book_detail') The Universe in a Nutshell
-					td
-						a(href='patron_detail') Alena Holligan
-					td 2015-12-13
-					td 2015-12-20
-					td
-					td
-						a.button(href='return_book') Return Book
+			each loan in loans
+					tr
+						td
+							a(href="/books/" +loan.Books.id) #{loan.Books.title}
+							td
+								a(href="/patrons/" + loan.Patrons.id) #{loan.Patrons.first_name} #{loan.Patrons.lat_name}
+							td #{loan.loaned_on}
+							td #{loan.return_by}
+							td #{loan.returned_on}
+							td
+								a(href="/books/" + loan.Books.id + '/return') Return Book
+
